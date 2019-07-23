@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Agent | YaDude')
+@section('title', 'Users | Lara Admin')
 
 @section('content_header')
-    <h1>Agents</h1>
+    <h1>Users</h1>
 @stop
 
 @section('content')
@@ -24,10 +24,19 @@
                 <th>Email</th>
                 <th>Created At</th>
                 <th>Updated At</th>
-                {{-- <th>Is Active</th>
-                <th width="20%">Action</th> --}}
               </tr>
             </thead>
+            <tbody>
+              @foreach ($users as $user)
+                <tr>
+                  <td>{{ $user->id }}</td>
+                  <td>{{ $user->name }}</td>
+                  <td>{{ $user->email }}</td>
+                  <td>{{ $user->created_at }}</td>
+                  <td>{{ $user->updated_at }}</td>
+                </tr>
+              @endforeach
+            </tbody>
           </table>
         </div>
       </div>
@@ -40,18 +49,7 @@
 @section('js')
 <script>
   $(document).ready( function () {
-    $('#laravel_datatable').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ url('user-list') }}",
-      columns: [
-        { data: 'id', name: 'id' },
-        { data: 'name', name: 'name' },
-        { data: 'email', name: 'email' },
-        { data: 'created_at', name: 'created_at' },
-        { data: 'updated_at', name: 'updated_at' }
-      ]
-    });
+    $('#laravel_datatable').DataTable();
   });
 </script>
 @stop
